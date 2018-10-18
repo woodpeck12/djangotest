@@ -1,0 +1,8 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+.idea/
+my_env/
+db.sqlite3

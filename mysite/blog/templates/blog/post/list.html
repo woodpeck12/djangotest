@@ -1,0 +1,7 @@
+<h1> list.html</h1>
+
+{% for post in posts %}
+
+title: {{ post.title}}
+<a href="{{ post.get_url }}">link</a>
+{% endfor %}
