@@ -1,7 +1,21 @@
-<h1> list.html</h1>
 
+{% extends 'blog/base.html'%}
+
+{% block title %}
+blog-post list pafe list.html
+{% endblock %}
+
+{% block content %}
+<h1> My blog - list.heml</h1>
 {% for post in posts %}
-
-title: {{ post.title}}
-<a href="{{ post.get_url }}">link</a>
+	<h2>
+		<a href="{{ post.get_url }}">
+			{{ post.title }}
+		</a>
+	</h2>
+	<p class="date">
+		Published {{post.publish}} by {{ post.author}}
+	</p>
+	{{post.body|truncatewords:30|linebreaks}}
 {% endfor %}
+{% endblock %}

@@ -119,3 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#woodpeck
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+print(BASE_DIR)
