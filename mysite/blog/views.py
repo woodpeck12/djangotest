@@ -3,9 +3,10 @@ from .models import Post
 # Create your views here.
 from django.http import HttpResponse  #for testing.need to be deleted
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.views.generic import ListView
 
 
-
+## normal list not using class
 def post_list(request):
 	all_posts = Post.objects.all()
 	paginator = Paginator(all_posts,2)
@@ -20,6 +21,15 @@ def post_list(request):
 
 	#return HttpResponse('blog main')
 	return render(request,'blog/post/list.html',{'posts':posts})
+
+## using class view
+class PostListView(ListView):
+	template_name= 'blog/post/classlist.html'
+	queryset  = Post.objects.all()
+	context_object_name = 'posts'
+	paginate_by = 2
+
+
 
 def post_detail(request,year,month,day,post):
 	post = get_object_or_404(Post,slug=post,
