@@ -121,5 +121,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #woodpeck
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-print(BASE_DIR)
+#STATIC_ROOT = os.path.join(BASE_DIR,'static')
+#print(BASE_DIR)

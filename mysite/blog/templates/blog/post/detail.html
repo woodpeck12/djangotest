@@ -1,7 +1,17 @@
-<h1> detail.html</h1>
+{% extends 'blog/base.html' %}
 
-id:{{post.id}} <br>
-title:{{post.title}}<br>
-slug:{{post.slug}}<br>
-body:{{post.body}}<br>
-publish:{{post.publish}}
+
+{%block title%} 
+{{post.title}} - detail.html 
+{%endblock%}
+
+
+{%block content%}
+
+<h1>{{post.title}}</h1>
+<p class='date'>
+	Published {{post.publish}} bt {{post.author}}
+</p>
+
+{{post.body | linebreaks}}
+{%endblock%}
