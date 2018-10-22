@@ -4,7 +4,7 @@ from .models import Post
 from django.http import HttpResponse  #for testing.need to be deleted
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.views.generic import ListView
-
+from .forms import EmailPostform
 
 ## normal list not using class
 def post_list(request):
@@ -38,3 +38,28 @@ def post_detail(request,year,month,day,post):
 								  publish__month = month,
 								  publish__day=day)
 	return render(request,'blog/post/detail.html',{'post':post})
+
+def send_email(request,post_id):
+	post = get_object_or_404(Post,id=post_id,status='published')
+	form = EmailPostform()
+	sent = False
+	if request.method == 'POST':
+		form = EmailPostform(request.POST)
+		if form.is_valid():
+			received_data=form.cleaned_data
+
+			print('received dtata',received_data)
+			print('url',post.get_url())
+			print('abosolute url',request.build_absolute_uri(post.get_url()))
+			form = EmailPostform()
+			sent = True
+	context = {
+		'form' : form,
+		'post' : post,
+		'sent' : sent
+	}
+
+	return render(request,'blog/post/email.html',context)
+
+
+
