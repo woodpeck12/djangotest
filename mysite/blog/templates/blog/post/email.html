@@ -5,8 +5,9 @@
 {% block content %}
 <h2> Do you wnat to send post {{post.title}}</h2>
 {% if sent %}
-<h2> post title : {{post.title}} sent to</h2>
+<h2> post title : {{post.title}} sent to {{formdata.to}}</h2>
 {%else%}
+
 <form action='.' method="post">
 	{% csrf_token %}
 	{{ form.as_p}}

@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post
+from .models import (Post,
+					Comment)
 
 class PostAdmin(admin.ModelAdmin):
 	list_display = ('title','slug','author', 'publish','status')
@@ -13,3 +14,5 @@ class PostAdmin(admin.ModelAdmin):
 	ordering = ['status', 'publish']
 
 admin.site.register(Post,PostAdmin)
+
+admin.site.register(Comment)

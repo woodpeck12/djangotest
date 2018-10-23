@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post,Comment
 # Create your views here.
 from django.http import HttpResponse  #for testing.need to be deleted
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.views.generic import ListView
-from .forms import EmailPostform
+from .forms import (EmailPostform,
+					CommentForm)
 
 ## normal list not using class
 def post_list(request):
@@ -43,6 +44,7 @@ def send_email(request,post_id):
 	post = get_object_or_404(Post,id=post_id,status='published')
 	form = EmailPostform()
 	sent = False
+	received_data=None
 	if request.method == 'POST':
 		form = EmailPostform(request.POST)
 		if form.is_valid():
@@ -56,10 +58,10 @@ def send_email(request,post_id):
 	context = {
 		'form' : form,
 		'post' : post,
-		'sent' : sent
+		'sent' : sent,
+		'formdata': received_data
 	}
 
 	return render(request,'blog/post/email.html',context)
-
 
 

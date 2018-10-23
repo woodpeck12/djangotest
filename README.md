@@ -10,4 +10,7 @@ class PostListView(ListView):
 
 2. use paginator feature - blog/view.py & blog/template/blog/post/classlist.html & list.html
 
-3. makr a form using django.forms
+3. make a form using django.forms - blog/forms.py (class EmailPostform(forms.Form)
+
+4. make a form using forms.ModelForm ----progress
+
