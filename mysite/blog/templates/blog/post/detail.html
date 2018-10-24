@@ -15,4 +15,30 @@
 
 {{post.body | linebreaks}}
 <a href="{%url 'blog:post_send' post.id%}">send this post to  email</a>
+<p></p>
+{% with comments.count as total_comments %}
+	{{total_comments}} comment{{ total_comments|pluralize}} 
+{% endwith %}
+
+{% for comment in comments %}
+<div class='info'>
+	comment {{ forloop.counter }} by {{ comment.name }}
+	{{ comment.created}}
+	<p></p>
+	{{comment.body|linebreaks}}
+{%empty%}
+<p>There is no comment yet</p>
+</div>
+{% endfor %}
+
+{% if new_comment %}
+<h2>your comment had been added</h2>
+{%else%}
+<h2> ADD a nee comment</h2>
+<form  method="post">
+	{% csrf_token %}
+	{{ comment_form.as_p }}
+	<input type="submit" name="add comment">
+</form>
+{%endif%}
 {%endblock%}

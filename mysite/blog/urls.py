@@ -6,9 +6,12 @@ from blog.views import (
 						send_email,
 						)
 
+app_name = 'blog'
+
 urlpatterns = [
 	path('',post_list,name='post_list'),
 	path('classpostview/',PostListView.as_view(),name='post_class_list'),
 	path('<int:post_id>/',send_email,name='post_send'),
-	path('<int:year>/<int:month>/<int:day>/<slug:post>',post_detail,name='post_detail'),
+	path('<int:year>/<int:month>/<int:day>/<slug:post>',
+		post_detail,name='post_detail'),
 ]

@@ -12,5 +12,7 @@ class PostListView(ListView):
 
 3. make a form using django.forms - blog/forms.py (class EmailPostform(forms.Form)
 
-4. make a form using forms.ModelForm ----progress
+4. make a form using forms.ModelForm 
+
+5. add comment function on blog -- view.py (post_detail())
 
