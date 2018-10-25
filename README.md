@@ -16,3 +16,4 @@ class PostListView(ListView):
 
 5. add comment function on blog -- view.py (post_detail())
 
+6. add tag -- using taggit
