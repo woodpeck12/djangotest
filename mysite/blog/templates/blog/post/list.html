@@ -7,12 +7,16 @@ blog-post list pafe list.html
 
 {% block content %}
 <h1> My blog - list.heml</h1>
+{% if tag %}
+<h2>Posts tagged with {{tag.name}}</h2>
+{% endif %}
 {% for post in posts %}
 	<h2>
 		<a href="{{ post.get_url }}">
 			{{ post.title }}
 		</a>
 	</h2>
+	<p class='tags'>Tags: {{ post.tags.all | join:','}} </p>
 	<p class="date">
 		Published {{post.publish}} by {{ post.author}}
 	</p>

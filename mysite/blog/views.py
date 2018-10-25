@@ -4,12 +4,18 @@ from .models import Post,Comment
 from django.http import HttpResponse  #for testing.need to be deleted
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.views.generic import ListView
+from taggit.models import Tag
 from .forms import (EmailPostform,
 					CommentForm)
 
 ## normal list not using class
-def post_list(request):
+def post_list(request,tag_slug=None):
 	all_posts = Post.objects.all()
+	tag = None
+
+	if tag_slug:
+		tag = get_object_or_404(Tag,slug=tag_slug)
+		all_posts = all_posts.filter(tags__in=[tag])
 	paginator = Paginator(all_posts,2)
 	page = request.GET.get('page')
 
@@ -21,7 +27,7 @@ def post_list(request):
 		posts=paginator.get_pages(paginator.num_pages)
 
 	#return HttpResponse('blog main')
-	return render(request,'blog/post/list.html',{'posts':posts})
+	return render(request,'blog/post/list.html',{'posts':posts,'tag':tag})
 
 ## using class view
 class PostListView(ListView):

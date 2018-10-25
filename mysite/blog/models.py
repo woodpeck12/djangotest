@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 from django.utils import timezone
 from django.urls import reverse
+from taggit.managers import TaggableManager
 #from django.contrib.auth.models import User
 
 
@@ -16,6 +17,9 @@ class Post(models.Model):
 		('draft', 'Draft'),
 		('published', 'Published'),
 		)
+	#tagging using taggit
+	tags = TaggableManager()
+	
 	title = models.CharField(max_length=250)
 	slug = models.SlugField(max_length=250,unique_for_date='publish')
 	author = models.ForeignKey('auth.user',related_name='blog_posts',on_delete='CASCADE')
